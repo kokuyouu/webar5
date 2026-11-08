@@ -22,8 +22,8 @@ export class ARController {
     try {
       if (!navigator.xr) throw new Error('WebXR недоступен. Откройте сайт по HTTPS в браузере с поддержкой AR.');
       session = await navigator.xr.requestSession('immersive-ar', {
-        requiredFeatures: ['hit-test', 'dom-overlay'],
-        optionalFeatures: ['local-floor'],
+        requiredFeatures: ['hit-test'],
+        optionalFeatures: ['local-floor', 'dom-overlay'],
         domOverlay: {root: this.ui.root}
       });
       this.session = session;
@@ -46,7 +46,7 @@ export class ARController {
       if (session && this.session === session) await session.end().catch(() => {});
       this.ui.launch.disabled = false;
       this.ui.status(error.name === 'NotSupportedError'
-        ? 'Устройство не поддерживает AR с hit-test и DOM Overlay. Предпросмотр доступен.'
+        ? 'Устройство не поддерживает AR с hit-test. Предпросмотр доступен.'
         : error.name === 'NotAllowedError' ? 'Запуск AR отменён или разрешение не предоставлено.' : error.message);
     }
   }
