@@ -58,7 +58,7 @@ export class ARController {
     this.marker.visible = false;
     this.object.preview();
     this.ui.setAR(false);
-    this.ui.status('Предпросмотр · настройте объект и откройте AR');
+    this.ui.status('');
   }
 
   update(frame) {
